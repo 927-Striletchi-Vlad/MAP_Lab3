@@ -1,0 +1,26 @@
+package Model.Expression;
+
+import Model.ADT.MyDictionaryInterface;
+import Model.Value.IntValue;
+import Model.Value.Value;
+import Exception.MyException;
+
+public class ValueExpression implements Expression{
+    Value e;
+
+    public ValueExpression(Value value) {
+        this.e = value;
+    }
+
+    @Override
+    public Value evaluate(MyDictionaryInterface<String, Value> symTable) throws MyException{
+        return e;
+    }
+
+    @Override
+    public String toString() {
+        return "ValueExpression{" +
+                "e=" + e +
+                '}';
+    }
+}
