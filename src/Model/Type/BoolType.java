@@ -19,4 +19,9 @@ public class BoolType implements Type{
         boolean b=false;
         return new BoolValue(b);
     }
+
+    @Override
+    public Type deepCopy() {
+        return new BoolType();
+    }
 }

@@ -20,4 +20,9 @@ public class IntType implements Type{
         int i=0;
         return new IntValue(0);
     }
+
+    @Override
+    public Type deepCopy() {
+        return new IntType();
+    }
 }

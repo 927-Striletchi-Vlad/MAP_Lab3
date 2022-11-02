@@ -23,4 +23,9 @@ public class CompoundStmt implements IStmt{
         stack.push(first);
         return state;
     }
+
+    @Override
+    public IStmt deepCopy() {
+        return new CompoundStmt(first.deepCopy(), second.deepCopy());
+    }
 }

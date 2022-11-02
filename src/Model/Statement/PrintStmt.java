@@ -26,4 +26,9 @@ public class PrintStmt implements IStmt{
         state.setOutput(stateOutput);
         return state;
     }
+
+    @Override
+    public IStmt deepCopy() {
+        return new PrintStmt(expression.deepCopy());
+    }
 }

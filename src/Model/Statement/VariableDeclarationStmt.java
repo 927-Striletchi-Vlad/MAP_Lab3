@@ -25,6 +25,11 @@ public class VariableDeclarationStmt implements IStmt{
     }
 
     @Override
+    public IStmt deepCopy() {
+        return new VariableDeclarationStmt(name.toString(), type.deepCopy());
+    }
+
+    @Override
     public String toString() {
         return "VariableDeclarationStmt{" +
                 "name='" + name + '\'' +

@@ -33,7 +33,7 @@ public class MyDictionary<TKey, TValue> implements MyDictionaryInterface<TKey, T
     public String toString() {
         String result = new String();
         for(TKey k: dictionary.keySet()){
-            String subResult = new String(k.toString()+ " " + dictionary.get(k).toString());
+            String subResult = new String(k.toString()+ " " + dictionary.get(k).toString()+"\n");
             result = result.concat(subResult);
         }
         return result;

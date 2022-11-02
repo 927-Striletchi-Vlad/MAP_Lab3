@@ -14,6 +14,12 @@ public class LogicExpression implements Expression{
     Expression e1, e2;
     int op; //1-"==", 2-"!=", 3-"<=", 4-">=", 5-"<", 6-">"
 
+    public LogicExpression(Expression e1, Expression e2, int op) {
+        this.e1 = e1;
+        this.e2 = e2;
+        this.op = op;
+    }
+
     private boolean evaluateInt(IntValue v1, IntValue v2, int op){
         if(op==1){ return v1.getValue()==v2.getValue();}
         if(op==2){ return v1.getValue()!=v2.getValue();}
@@ -49,6 +55,11 @@ public class LogicExpression implements Expression{
         }
 
         throw new MyException("Could not evaluate.");
+    }
+
+    @Override
+    public Expression deepCopy() {
+        return new LogicExpression(e1,e2,op);
     }
 
 

@@ -37,4 +37,9 @@ public class AssignStmt implements IStmt{
         symbolTable.update(id,value);
         return state;
     }
+
+    @Override
+    public IStmt deepCopy() {
+        return new AssignStmt(id.toString(), expression.deepCopy());
+    }
 }

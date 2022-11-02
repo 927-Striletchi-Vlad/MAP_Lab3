@@ -7,4 +7,5 @@ public interface Type {
     String toString();
 
     Value defaultValue();
+    Type deepCopy();
 }

@@ -5,4 +5,5 @@ import Exception.MyException;
 public interface IStmt {
     public ProgramState execute(ProgramState state) throws MyException;
 
+    IStmt deepCopy();
 }

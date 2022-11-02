@@ -18,6 +18,11 @@ public class ValueExpression implements Expression{
     }
 
     @Override
+    public Expression deepCopy() {
+        return new ValueExpression(e);
+    }
+
+    @Override
     public String toString() {
         return "ValueExpression{" +
                 "e=" + e +

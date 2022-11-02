@@ -16,7 +16,7 @@ public class ProgramState {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.output = output;
-        this.originalProgram = originalProgram;
+        this.originalProgram = originalProgram.deepCopy();
         exeStack.push(originalProgram);
     }
 

@@ -20,6 +20,13 @@ public class ArithmeticExpression implements Expression{
         if(c=='/'){op=4;}
     }
 
+    public ArithmeticExpression(int op, Expression e1, Expression e2) {
+        this.e1 = e1;
+        this.e2 = e2;
+        this.op = op;
+    }
+
+
     @Override
     public Value evaluate(MyDictionaryInterface<String, Value> symTable) throws MyException {
         Value v1, v2;
@@ -55,5 +62,10 @@ public class ArithmeticExpression implements Expression{
 
         throw new MyException("first operand is not an integer");
 
+    }
+
+    @Override
+    public Expression deepCopy() {
+        return new ArithmeticExpression(op, e1, e2);
     }
 }

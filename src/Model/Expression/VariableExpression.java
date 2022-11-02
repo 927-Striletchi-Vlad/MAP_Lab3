@@ -17,6 +17,11 @@ public class VariableExpression implements Expression{
     }
 
     @Override
+    public Expression deepCopy() {
+        return new VariableExpression(id);
+    }
+
+    @Override
     public String toString() {
         return "VariableExpression{" +
                 "id='" + id + '\'' +

@@ -6,4 +6,5 @@ import Exception.MyException;
 
 public interface Expression {
     Value evaluate(MyDictionaryInterface<String, Value> symTable) throws MyException;
+    Expression deepCopy();
 }
