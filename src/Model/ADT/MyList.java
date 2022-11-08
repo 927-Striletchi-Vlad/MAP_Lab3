@@ -27,6 +27,7 @@ public class MyList<TElem> implements MyListInterface<TElem>{
         String result = new String();
         for(TElem elem:list){
             result = result.concat(elem.toString());
+            result=result.concat("\n");
         }
         return result;
     }

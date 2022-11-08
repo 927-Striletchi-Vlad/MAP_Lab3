@@ -2,6 +2,10 @@ package Repository;
 
 import Model.ProgramState;
 
+import Exception.MyException;
+
 public interface RepositoryInterface {
-    public ProgramState getCurrentProgram();
+    ProgramState getCurrentProgram();
+
+    void logProgramStateExecution() throws MyException;
 }

@@ -24,9 +24,12 @@ public class Controller {
 
     public void allStep() throws MyException{
         ProgramState state = repositoryInterface.getCurrentProgram();
+        repositoryInterface.logProgramStateExecution();
+
         while (!state.getStack().isEmpty()){
             try{
                 state = oneStep(state);
+                repositoryInterface.logProgramStateExecution();
             }
             catch (Exception exception){
                 throw new MyException(exception.getMessage());

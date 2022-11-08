@@ -5,6 +5,8 @@ public interface MyDictionaryInterface<TKey, TValue> {
 
     public void update(TKey k, TValue v);
 
+    public void remove(TKey k);
+
     public TValue lookup(TKey k) ;
 
     public boolean isDefined(String id);

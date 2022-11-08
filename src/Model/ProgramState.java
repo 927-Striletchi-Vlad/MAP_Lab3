@@ -2,19 +2,23 @@ package Model;
 
 import Model.ADT.*;
 import Model.Statement.IStmt;
+import Model.Value.StringValue;
 import Model.Value.Value;
 
 import javax.print.attribute.IntegerSyntax;
+import java.io.BufferedReader;
 
 public class ProgramState {
     private MyStackInterface<IStmt> exeStack;
     private MyDictionaryInterface<String, Value> symTable;
+    private MyDictionaryInterface<StringValue, BufferedReader> fileTable;
     private MyListInterface<Value> output;
     private IStmt originalProgram;
 
-    public ProgramState(MyStackInterface<IStmt> exeStack, MyDictionaryInterface<String, Value> symTable, MyListInterface<Value> output, IStmt originalProgram) {
+    public ProgramState(MyStackInterface<IStmt> exeStack, MyDictionaryInterface<String, Value> symTable, MyDictionaryInterface<StringValue, BufferedReader> fileTable, MyListInterface<Value> output, IStmt originalProgram) {
         this.exeStack = exeStack;
         this.symTable = symTable;
+        this.fileTable = fileTable;
         this.output = output;
         this.originalProgram = originalProgram.deepCopy();
         exeStack.push(originalProgram);
@@ -42,5 +46,27 @@ public class ProgramState {
 
     public void setSymTable(MyDictionaryInterface<String, Value> symTable) {
         this.symTable = symTable;
+    }
+
+    public MyDictionaryInterface<StringValue, BufferedReader> getFileTable() {
+        return fileTable;
+    }
+
+    @Override
+    public String toString() {
+        String res = new String();
+        res=res.concat("\n-----EXECUTION STACK:-----\n");
+        res=res.concat(exeStack.toString());
+
+        res=res.concat("\n-----SYMBOL TABLE:-----\n");
+        res=res.concat(symTable.toString());
+
+        res=res.concat("\n-----FILE TABLE:-----\n");
+        res=res.concat(fileTable.toString());
+
+        res=res.concat("\n-----OUTPUT:-----\n");
+        res=res.concat(output.toString());
+
+        return res;
     }
 }

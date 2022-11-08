@@ -20,6 +20,14 @@ public class IntValue implements Value{
         return new IntValue(val);
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof IntValue){
+            return this.val == ((IntValue) obj).val;
+        }
+        return false;
+    }
+
     public int getValue() {
         return val;
     }

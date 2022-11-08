@@ -20,6 +20,11 @@ public class MyDictionary<TKey, TValue> implements MyDictionaryInterface<TKey, T
     }
 
     @Override
+    public void remove(TKey k) {
+        dictionary.remove(k);
+    }
+
+    @Override
     public TValue lookup(TKey k) {
         return dictionary.get(k);
     }
