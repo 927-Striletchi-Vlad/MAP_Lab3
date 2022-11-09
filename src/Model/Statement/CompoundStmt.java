@@ -16,6 +16,29 @@ public class CompoundStmt implements IStmt{
     public String toString(){
         return "(" + first.toString() + second.toString() + ")";
     }
+    public String toStringUnpacked(){
+        /* Unpack the statement, and put each non-compound statement
+         *  on a new line.
+         */
+        String result = "";
+        if (first instanceof CompoundStmt){
+            result = result.concat(((CompoundStmt) first).toStringUnpacked());
+        }
+        else{
+            result = result.concat(first.toString());
+        }
+        result = result.concat("\n");
+
+        if (second instanceof CompoundStmt){
+            result = result.concat(((CompoundStmt) second).toStringUnpacked());
+        }
+        else{
+            result = result.concat(second.toString());
+        }
+
+        return result;
+
+    }
 
     public ProgramState execute(ProgramState state) throws MyException {
         MyStack<IStmt> stack = state.getStack();

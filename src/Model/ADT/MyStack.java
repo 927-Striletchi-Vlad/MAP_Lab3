@@ -1,5 +1,7 @@
 package Model.ADT;
 
+import Model.Statement.CompoundStmt;
+
 import java.util.Stack;
 
 public class MyStack<TElem> implements MyStackInterface<TElem>{
@@ -29,7 +31,13 @@ public class MyStack<TElem> implements MyStackInterface<TElem>{
     public String toString() {
         String result = new String();
         for(TElem elem: stack){
-            String subResult = new String(elem.toString() + "\n");
+            String subResult;
+            if (elem instanceof CompoundStmt){
+                subResult = new String(((CompoundStmt) elem).toStringUnpacked() + "\n");
+            }
+            else{
+                subResult = new String(elem.toString() + "\n");
+            }
             result = subResult.concat(result);
         }
         return result;
