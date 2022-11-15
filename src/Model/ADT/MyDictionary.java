@@ -43,4 +43,8 @@ public class MyDictionary<TKey, TValue> implements MyDictionaryInterface<TKey, T
         }
         return result;
     }
+
+    public HashMap<TKey, TValue> getDictionary() {
+        return dictionary;
+    }
 }

@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.ADT.MyStackInterface;
+import Model.GarbageCollector;
 import Model.ProgramState;
 import Model.Statement.IStmt;
 import Repository.RepositoryInterface;
@@ -24,11 +25,15 @@ public class Controller {
 
     public void allStep() throws MyException{
         ProgramState state = repositoryInterface.getCurrentProgram();
+        GarbageCollector garbageCollector = new GarbageCollector();
         repositoryInterface.logProgramStateExecution();
 
         while (!state.getStack().isEmpty()){
             try{
                 state = oneStep(state);
+                repositoryInterface.logProgramStateExecution();
+                state =  garbageCollector.collectGarbage(state);
+                repositoryInterface.logCustomMessage("################## INTERVENTION OF THE GARBAGE COLLECTOR ##################");
                 repositoryInterface.logProgramStateExecution();
             }
             catch (Exception exception){

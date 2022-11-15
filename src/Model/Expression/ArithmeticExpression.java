@@ -1,6 +1,7 @@
 package Model.Expression;
 
 import Model.ADT.MyDictionaryInterface;
+import Model.ADT.MyHeapInterface;
 import Model.Type.IntType;
 import Model.Value.IntValue;
 import Model.Value.Value;
@@ -28,11 +29,11 @@ public class ArithmeticExpression implements Expression{
 
 
     @Override
-    public Value evaluate(MyDictionaryInterface<String, Value> symTable) throws MyException {
+    public Value evaluate(MyDictionaryInterface<String, Value> symTable, MyHeapInterface<Integer, Value> heap) throws MyException {
         Value v1, v2;
-        v1 = e1.evaluate(symTable);
+        v1 = e1.evaluate(symTable, heap);
         if (v1.getType().equals(new IntType())) {
-            v2 = e2.evaluate(symTable);
+            v2 = e2.evaluate(symTable, heap);
             if (v2.getType().equals(new IntType())) {
                 IntValue i1 = (IntValue) v1;
                 IntValue i2 = (IntValue) v2;
@@ -62,6 +63,15 @@ public class ArithmeticExpression implements Expression{
 
         throw new MyException("first operand is not an integer");
 
+    }
+
+    @Override
+    public String toString() {
+        return "ArithmeticExpression{" +
+                "op=" + op +
+                ", e1=" + e1 +
+                ", e2=" + e2 +
+                '}';
     }
 
     @Override

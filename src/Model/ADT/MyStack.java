@@ -36,7 +36,7 @@ public class MyStack<TElem> implements MyStackInterface<TElem>{
                 subResult = new String(((CompoundStmt) elem).toStringUnpacked() + "\n");
             }
             else{
-                subResult = new String(elem.toString() + "\n");
+                subResult = new String(elem.toString() + "\n\n");
             }
             result = subResult.concat(result);
         }

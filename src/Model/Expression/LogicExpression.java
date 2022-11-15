@@ -1,6 +1,7 @@
 package Model.Expression;
 
 import Model.ADT.MyDictionaryInterface;
+import Model.ADT.MyHeapInterface;
 import Model.Type.BoolType;
 import Model.Type.IntType;
 import Model.Value.BoolValue;
@@ -8,6 +9,7 @@ import Model.Value.IntValue;
 import Model.Value.Value;
 import Exception.MyException;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LogicExpression implements Expression{
@@ -18,6 +20,18 @@ public class LogicExpression implements Expression{
         this.e1 = e1;
         this.e2 = e2;
         this.op = op;
+    }
+    public LogicExpression(Expression e1, Expression e2, String op) {
+        this.e1 = e1;
+        this.e2 = e2;
+        switch (op) {
+            case "==" -> this.op = 1;
+            case "!=" -> this.op = 2;
+            case "<=" -> this.op = 3;
+            case ">=" -> this.op = 4;
+            case "<" -> this.op = 5;
+            case ">" -> this.op = 6;
+        }
     }
 
     private boolean evaluateInt(IntValue v1, IntValue v2, int op){
@@ -37,11 +51,11 @@ public class LogicExpression implements Expression{
 
 
     @Override
-    public Value evaluate(MyDictionaryInterface<String, Value> symTable) throws MyException {
-        Value v1 = e1.evaluate(symTable);
-        Value v2 = e2.evaluate(symTable);
+    public Value evaluate(MyDictionaryInterface<String, Value> symTable, MyHeapInterface<Integer, Value> heap) throws MyException {
+        Value v1 = e1.evaluate(symTable, heap);
+        Value v2 = e2.evaluate(symTable, heap);
 
-        if(v1.getType() != v2.getType()){
+        if(!v1.getType().equals(v2.getType())){
             throw new MyException("Different data types, illegal.");
         }
 
@@ -62,5 +76,12 @@ public class LogicExpression implements Expression{
         return new LogicExpression(e1,e2,op);
     }
 
-
+    @Override
+    public String toString() {
+        return "LogicExpression{" +
+                "e1=" + e1 +
+                ", e2=" + e2 +
+                ", op=" + op +
+                '}';
+    }
 }

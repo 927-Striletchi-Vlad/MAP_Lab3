@@ -1,6 +1,7 @@
 package Model.Statement;
 
 import Model.ADT.MyDictionaryInterface;
+import Model.ADT.MyHeapInterface;
 import Model.Expression.Expression;
 import Model.ProgramState;
 import Exception.MyException;
@@ -29,13 +30,14 @@ public class ReadFileStmt implements IStmt{
         }
         String variableNameString = ((StringValue)variableName).getVal();
         MyDictionaryInterface<String, Value> symTable = state.getSymbolTable();
+        MyHeapInterface<Integer, Value> heap = state.getHeap();
         if (!symTable.isDefined(variableNameString)){
             throw new MyException("Variable name does not exist in the symbol table.");
         }
         if (!symTable.lookup(variableNameString).getType().equals(new IntType())){
             throw new MyException("Variable is not of type IntType.");
         }
-        Value evaluated = expression.evaluate(symTable);
+        Value evaluated = expression.evaluate(symTable, heap);
         if (!evaluated.getType().equals(new StringType())){
             throw new MyException("Expression does not evaluate to string.");
         }

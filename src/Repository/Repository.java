@@ -50,4 +50,16 @@ public class Repository implements RepositoryInterface{
         logFile.close();
 
     }
+
+    @Override
+    public void logCustomMessage(String message) throws MyException {
+        PrintWriter logFile = null;
+        try {
+            logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
+        } catch (IOException e) {
+            throw new MyException(e.getMessage());
+        }
+        logFile.write(message);
+        logFile.close();
+    }
 }

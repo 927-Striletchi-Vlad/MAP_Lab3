@@ -1,6 +1,7 @@
 package Model.Statement;
 
 import Model.ADT.MyDictionaryInterface;
+import Model.ADT.MyHeapInterface;
 import Model.ADT.MyListInterface;
 import Model.Expression.Expression;
 import Model.Expression.VariableExpression;
@@ -22,7 +23,8 @@ public class PrintStmt implements IStmt{
     public ProgramState execute(ProgramState state) throws MyException{
         MyListInterface<Value> stateOutput = state.getOutput();
         MyDictionaryInterface<String, Value> symTable = state.getSymbolTable();
-        stateOutput.add(expression.evaluate(symTable));
+        MyHeapInterface<Integer, Value> heap = state.getHeap();
+        stateOutput.add(expression.evaluate(symTable, heap));
         state.setOutput(stateOutput);
         return state;
     }

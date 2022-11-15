@@ -26,7 +26,7 @@ public class IfStmt implements IStmt{
 
     @Override
     public ProgramState execute(ProgramState state) throws MyException {
-        BoolValue temp = (BoolValue) expression.evaluate(state.getSymbolTable());
+        BoolValue temp = (BoolValue) expression.evaluate(state.getSymbolTable(), state.getHeap());
         boolean evalResult = temp.getValue();
         if(evalResult){
             thenS.execute(state);

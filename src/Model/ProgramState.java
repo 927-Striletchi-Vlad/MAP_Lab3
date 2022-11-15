@@ -12,16 +12,24 @@ public class ProgramState {
     private MyStackInterface<IStmt> exeStack;
     private MyDictionaryInterface<String, Value> symTable;
     private MyDictionaryInterface<StringValue, BufferedReader> fileTable;
+    private MyHeapInterface<Integer, Value> heap;
     private MyListInterface<Value> output;
     private IStmt originalProgram;
 
-    public ProgramState(MyStackInterface<IStmt> exeStack, MyDictionaryInterface<String, Value> symTable, MyDictionaryInterface<StringValue, BufferedReader> fileTable, MyListInterface<Value> output, IStmt originalProgram) {
+    public ProgramState(MyStackInterface<IStmt> exeStack, MyDictionaryInterface<String, Value> symTable,
+                        MyDictionaryInterface<StringValue, BufferedReader> fileTable, MyListInterface<Value> output,
+                        MyHeapInterface<Integer, Value> heap ,IStmt originalProgram) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.fileTable = fileTable;
+        this.heap = heap;
         this.output = output;
         this.originalProgram = originalProgram.deepCopy();
         exeStack.push(originalProgram);
+    }
+
+    public MyHeapInterface<Integer, Value> getHeap() {
+        return heap;
     }
 
     public MyListInterface<Value> getOutput() {
@@ -63,6 +71,9 @@ public class ProgramState {
 
         res=res.concat("\n-----FILE TABLE:-----\n");
         res=res.concat(fileTable.toString());
+
+        res=res.concat("\n-----HEAP:-----\n");
+        res=res.concat(heap.toString());
 
         res=res.concat("\n-----OUTPUT:-----\n");
         res=res.concat(output.toString());

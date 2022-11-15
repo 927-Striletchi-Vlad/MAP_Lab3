@@ -21,7 +21,7 @@ public class OpenReadFileStmt implements IStmt{
 
     @Override
     public ProgramState execute(ProgramState state) throws MyException{
-        Value value = expression.evaluate(state.getSymbolTable());
+        Value value = expression.evaluate(state.getSymbolTable(), state.getHeap());
         if (!value.getType().equals(new StringType())){
             throw new MyException("Expression does not contain a StringValue.");
         }

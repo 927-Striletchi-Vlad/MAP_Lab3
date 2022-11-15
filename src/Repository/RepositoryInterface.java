@@ -8,4 +8,5 @@ public interface RepositoryInterface {
     ProgramState getCurrentProgram();
 
     void logProgramStateExecution() throws MyException;
+    void logCustomMessage(String message) throws MyException;
 }

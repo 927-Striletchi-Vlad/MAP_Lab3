@@ -1,6 +1,7 @@
 package Model.Expression;
 
 import Model.ADT.MyDictionaryInterface;
+import Model.ADT.MyHeapInterface;
 import Model.Value.IntValue;
 import Model.Value.Value;
 import Exception.MyException;
@@ -13,7 +14,7 @@ public class ValueExpression implements Expression{
     }
 
     @Override
-    public Value evaluate(MyDictionaryInterface<String, Value> symTable) throws MyException{
+    public Value evaluate(MyDictionaryInterface<String, Value> symTable, MyHeapInterface<Integer, Value> heap) throws MyException{
         return e;
     }
 
