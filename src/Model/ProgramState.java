@@ -4,11 +4,7 @@ import Model.ADT.*;
 import Model.Statement.IStmt;
 import Model.Value.StringValue;
 import Model.Value.Value;
-
-import javax.print.attribute.IntegerSyntax;
-
 import Exception.MyException;
-
 import java.io.BufferedReader;
 
 public class ProgramState {

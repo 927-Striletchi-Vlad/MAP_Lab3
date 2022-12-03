@@ -1,7 +1,5 @@
 package Model.ADT;
 
-import Model.Value.Value;
-
 import java.util.List;
 
 public interface MyListInterface<TElem> {

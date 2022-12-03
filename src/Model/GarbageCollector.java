@@ -1,9 +1,7 @@
 package Model;
 
 import Model.ADT.MyDictionary;
-import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyHeap;
-import Model.ADT.MyHeapInterface;
 import Model.Value.ReferenceValue;
 import Model.Value.Value;
 

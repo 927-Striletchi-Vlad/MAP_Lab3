@@ -7,7 +7,6 @@ import Model.ProgramState;
 import Exception.MyException;
 import Model.Type.ReferenceType;
 import Model.Value.ReferenceValue;
-import Model.Value.StringValue;
 import Model.Value.Value;
 
 public class NewStmt implements IStmt{

@@ -9,8 +9,6 @@ import Model.Value.StringValue;
 import Model.Value.Value;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 
 public class CloseReadFileStmt implements IStmt{

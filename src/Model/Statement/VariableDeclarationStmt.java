@@ -2,7 +2,6 @@ package Model.Statement;
 
 import Model.ADT.MyDictionaryInterface;
 import Model.ProgramState;
-import Model.Type.IntType;
 import Model.Type.Type;
 import Model.Value.Value;
 import Exception.MyException;

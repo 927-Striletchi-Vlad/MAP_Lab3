@@ -4,7 +4,6 @@ import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyHeapInterface;
 import Model.ADT.MyListInterface;
 import Model.Expression.Expression;
-import Model.Expression.VariableExpression;
 import Model.ProgramState;
 import Exception.MyException;
 import Model.Value.Value;

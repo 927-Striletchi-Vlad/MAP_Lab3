@@ -1,15 +1,8 @@
 package Model.Statement;
 
-import java.io.BufferedReader;
-
 import Exception.MyException;
 import Model.ProgramState;
-import Model.ADT.MyDictionary;
-import Model.ADT.MyHeap;
-import Model.ADT.MyList;
 import Model.ADT.MyStack;
-import Model.Value.StringValue;
-import Model.Value.Value;
 
 public class ThreadStmt implements IStmt{
     private IStmt stmt;

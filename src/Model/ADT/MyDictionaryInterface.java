@@ -1,6 +1,5 @@
 package Model.ADT;
 
-import java.util.HashMap;
 
 public interface MyDictionaryInterface<TKey, TValue> {
     public void add(TKey k, TValue v);

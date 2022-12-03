@@ -2,9 +2,7 @@ package Model.Statement;
 
 import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyHeapInterface;
-import Model.ADT.MyStackInterface;
 import Model.Expression.Expression;
-import Model.Expression.ValueExpression;
 import Model.ProgramState;
 import Exception.MyException;
 import Model.Type.Type;
@@ -24,7 +22,6 @@ public class AssignStmt implements IStmt{
     }
 
     public ProgramState execute(ProgramState state) throws MyException{
-        MyStackInterface<IStmt> stack = state.getStack();
         MyDictionaryInterface<String, Value> symbolTable = state.getSymbolTable();
         MyHeapInterface<Integer, Value> heap = state.getHeap();
 

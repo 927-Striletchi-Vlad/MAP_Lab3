@@ -1,6 +1,5 @@
 package Model.Type;
 
-import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.Value;
 

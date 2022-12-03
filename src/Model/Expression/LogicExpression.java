@@ -9,8 +9,6 @@ import Model.Value.IntValue;
 import Model.Value.Value;
 import Exception.MyException;
 
-import java.util.List;
-import java.util.Objects;
 
 public class LogicExpression implements Expression{
     Expression e1, e2;

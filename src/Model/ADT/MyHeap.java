@@ -1,7 +1,6 @@
 package Model.ADT;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class MyHeap<TKey extends Integer, TValue> implements MyHeapInterface<TKey, TValue>{
     HashMap<TKey, TValue> heap;

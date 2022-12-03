@@ -1,10 +1,6 @@
 package Model.ADT;
 
-import java.io.BufferedReader;
 import java.util.HashMap;
-
-import Model.Value.StringValue;
-import Model.Value.Value;
 
 public class MyDictionary<TKey, TValue> implements MyDictionaryInterface<TKey, TValue> {
     HashMap<TKey, TValue> dictionary;
