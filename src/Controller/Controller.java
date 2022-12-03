@@ -1,48 +1,97 @@
 package Controller;
 
-import Model.ADT.MyStackInterface;
 import Model.GarbageCollector;
 import Model.ProgramState;
-import Model.Statement.IStmt;
 import Repository.RepositoryInterface;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+
 import Exception.MyException;
 
 public class Controller {
     RepositoryInterface repositoryInterface;
+    ExecutorService executor;
 
     public Controller(RepositoryInterface repositoryInterface) {
         this.repositoryInterface = repositoryInterface;
     }
 
-    public ProgramState oneStep(ProgramState state) throws MyException{
-        MyStackInterface<IStmt> exeStack = state.getStack();
-        if (exeStack.isEmpty()){
-            throw new MyException("execution stack is empty.");
-        }
-        IStmt currentStatement = exeStack.pop();
-        return currentStatement.execute(state);
-    }
+    void oneStepAll(List<ProgramState> programStates){
+        programStates.forEach(programState -> {
+            try {
+                repositoryInterface.logProgramStateExecution(programState);
+            } catch (MyException e) {
+                e.printStackTrace();
+            }
+        });
 
-    public void allStep() throws MyException{
-        ProgramState state = repositoryInterface.getCurrentProgram();
+        List<Callable<ProgramState>> callList = programStates.stream()
+                .map((ProgramState programState) -> (Callable<ProgramState>)(() -> {return programState.oneStep();}))
+                .toList();
+
+
+        List<ProgramState> newProgramStates = null;
+        try {
+            newProgramStates = executor.invokeAll(callList).stream()
+                    .map(future -> {
+                        try {
+                            return future.get();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                        return null;
+                    })
+                    .filter(programState -> programState != null)
+                    .collect(Collectors.toList());
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
+        Set<ProgramState> set = new HashSet<>(programStates); // remove duplicates
+        set.addAll(programStates);
+        set.addAll(newProgramStates);
+        programStates.clear();
+        programStates.addAll(set);
+
+        programStates.forEach(programState -> {
+            try {
+                repositoryInterface.logProgramStateExecution(programState);
+            } catch (MyException e) {
+                e.printStackTrace();
+            }
+        });
+
+        repositoryInterface.setAllStates(programStates);
+    }    
+
+    public void allStep(){
+        executor = Executors.newFixedThreadPool(2);
+        List<ProgramState> programStates = removeCompletedPrograms(repositoryInterface.getAllStates());
         GarbageCollector garbageCollector = new GarbageCollector();
-        repositoryInterface.logProgramStateExecution();
 
-        while (!state.getStack().isEmpty()){
-            try{
-                state = oneStep(state);
-                repositoryInterface.logProgramStateExecution();
-                state =  garbageCollector.collectGarbage(state);
-                repositoryInterface.logCustomMessage("################## INTERVENTION OF THE GARBAGE COLLECTOR ##################");
-                repositoryInterface.logProgramStateExecution();
-            }
-            catch (Exception exception){
-                throw new MyException(exception.getMessage());
-            }
+        while(programStates.size() > 0){
+            garbageCollector.collectGarbage(programStates);
+            oneStepAll(programStates);
+            programStates = removeCompletedPrograms(repositoryInterface.getAllStates());
         }
+
+        executor.shutdownNow();
+        repositoryInterface.setAllStates(programStates);
     }
 
-    public ProgramState getCurrentState(){
-        return repositoryInterface.getCurrentProgram();
+
+    public List<ProgramState> removeCompletedPrograms(List<ProgramState> programStates ){
+        
+        List<ProgramState> res = programStates.stream()
+                .filter(programState -> programState.isNotCompleted())
+                .collect(Collectors.toList());
+
+        return res;
     }
 }

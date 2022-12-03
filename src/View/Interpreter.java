@@ -142,6 +142,29 @@ public class Interpreter {
         Repository Repo7 = new Repository(State7, "log7.txt");
         Controller Controller7 = new Controller(Repo7);
 
+        /* 
+        int v;
+        Ref int a;
+        v=10;
+        new(a,22);
+        fork(wH(a,30);v=32;print(v);print(rH(a)));
+        print(v);
+        print(rH(a));
+        */
+        IStmt ex8 = new CompoundStmt(new VariableDeclarationStmt("v", new IntType()),
+                new CompoundStmt(new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
+                new CompoundStmt(new AssignStmt("v", new ValueExpression(new IntValue(10))),
+                new CompoundStmt(new NewStmt("a", new ValueExpression(new IntValue(22))),
+                new CompoundStmt(new ThreadStmt(new CompoundStmt(new WriteHeapStmt("a", new ValueExpression(new IntValue(30))),
+                new CompoundStmt(new AssignStmt("v", new ValueExpression(new IntValue(32))),
+                new CompoundStmt(new PrintStmt(new VariableExpression("v")),
+                new PrintStmt(new ReadHeapExpression(new VariableExpression("a"))))))),
+                new CompoundStmt(new PrintStmt(new VariableExpression("v")),
+                new PrintStmt(new ReadHeapExpression(new VariableExpression("a")))))))));
+        ProgramState State8 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex8);
+        Repository Repo8 = new Repository(State8, "log8.txt");
+        Controller Controller8 = new Controller(Repo8);
+
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0", "exit"));
         menu.addCommand(new RunExample("1",ex1.toString(),Controller1));
@@ -151,7 +174,8 @@ public class Interpreter {
         menu.addCommand(new RunExample("5",ex5.toString(),Controller5));
         menu.addCommand(new RunExample("6",ex6.toString(),Controller6));
         menu.addCommand(new RunExample("7",ex7.toString(),Controller7));
-
+        menu.addCommand(new RunExample("8",ex8.toString(),Controller8));
+        //TODO TEST 8
         menu.show();
     }
 }

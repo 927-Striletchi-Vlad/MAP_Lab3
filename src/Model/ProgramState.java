@@ -6,6 +6,9 @@ import Model.Value.StringValue;
 import Model.Value.Value;
 
 import javax.print.attribute.IntegerSyntax;
+
+import Exception.MyException;
+
 import java.io.BufferedReader;
 
 public class ProgramState {
@@ -15,6 +18,8 @@ public class ProgramState {
     private MyHeapInterface<Integer, Value> heap;
     private MyListInterface<Value> output;
     private IStmt originalProgram;
+    private static int lastId = -1;
+    private int id;
 
     public ProgramState(MyStackInterface<IStmt> exeStack, MyDictionaryInterface<String, Value> symTable,
                         MyDictionaryInterface<StringValue, BufferedReader> fileTable, MyListInterface<Value> output,
@@ -26,6 +31,13 @@ public class ProgramState {
         this.output = output;
         this.originalProgram = originalProgram.deepCopy();
         exeStack.push(originalProgram);
+        if(lastId == -1){
+            lastId = 0;
+        }
+        else{
+            lastId++;
+        }
+        this.id = lastId;
     }
 
     public MyHeapInterface<Integer, Value> getHeap() {
@@ -60,9 +72,23 @@ public class ProgramState {
         return fileTable;
     }
 
+    public Boolean isNotCompleted() {
+        return !exeStack.isEmpty();
+    }
+
+    public ProgramState oneStep() throws MyException{
+        if (exeStack.isEmpty()){
+            throw new MyException("execution stack is empty.");
+        }
+        IStmt currentStatement = exeStack.pop();
+        return currentStatement.execute(this);
+    }
+
     @Override
     public String toString() {
         String res = new String();
+
+        res += "\n" + "ID: " + id;  
         res=res.concat("\n-----EXECUTION STACK:-----\n");
         res=res.concat(exeStack.toString());
 

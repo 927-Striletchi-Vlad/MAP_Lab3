@@ -1,12 +1,20 @@
 package Model.ADT;
 
+import java.io.BufferedReader;
 import java.util.HashMap;
 
-public class MyDictionary<TKey, TValue> implements MyDictionaryInterface<TKey, TValue>{
+import Model.Value.StringValue;
+import Model.Value.Value;
+
+public class MyDictionary<TKey, TValue> implements MyDictionaryInterface<TKey, TValue> {
     HashMap<TKey, TValue> dictionary;
 
     public MyDictionary() {
         this.dictionary = new HashMap<TKey, TValue>();
+    }
+
+    public MyDictionary(HashMap<TKey, TValue> dictionary) {
+        this.dictionary = dictionary;
     }
 
     @Override
@@ -46,5 +54,9 @@ public class MyDictionary<TKey, TValue> implements MyDictionaryInterface<TKey, T
 
     public HashMap<TKey, TValue> getDictionary() {
         return dictionary;
+    }
+
+    public MyDictionary<TKey, TValue> deepCopy() {
+        return new MyDictionary<TKey, TValue>((HashMap<TKey, TValue>)dictionary.clone());
     }
 }

@@ -25,28 +25,34 @@ public class Repository implements RepositoryInterface{
         this.logFilePath = logFilePath;
     }
 
-    public String getLogFilePath() {
-        return logFilePath;
+    public void addState(ProgramState state){
+        allStates.add(state);
     }
 
-    public void setLogFilePath(String logFilePath) {
-        this.logFilePath = logFilePath;
+    public List<ProgramState> getAllStates() {
+        return this.allStates;
     }
+
+    public void setAllStates(List<ProgramState> allStates) {
+        this.allStates = allStates;
+    }
+
+    
+
+    // @Override
+    // public ProgramState getCurrentProgram() {
+    //     return allStates.get(0);
+    // }
 
     @Override
-    public ProgramState getCurrentProgram() {
-        return allStates.get(0);
-    }
-
-    @Override
-    public void logProgramStateExecution() throws MyException {
+    public void logProgramStateExecution(ProgramState programState) throws MyException {
         PrintWriter logFile = null;
         try {
             logFile = new PrintWriter(new BufferedWriter(new FileWriter(logFilePath, true)));
         } catch (IOException e) {
             throw new MyException(e.getMessage());
         }
-        logFile.write(getCurrentProgram().toString());
+        logFile.write(programState.toString());
         logFile.close();
 
     }
@@ -62,4 +68,7 @@ public class Repository implements RepositoryInterface{
         logFile.write(message);
         logFile.close();
     }
+
+        
 }
+
