@@ -147,7 +147,7 @@ public class Interpreter {
         Ref int a;
         v=10;
         new(a,22);
-        fork(wH(a,30);v=32;print(v);print(rH(a)));
+        thread(wH(a,30);v=32;print(v);print(rH(a)));
         print(v);
         print(rH(a));
         */
