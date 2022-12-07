@@ -198,7 +198,7 @@ public class Interpreter {
         menu.addCommand(new RunExample("7",ex7.toString(),Controller7));
         menu.addCommand(new RunExample("8",ex8.toString(),Controller8));
         menu.addCommand(new RunExample("9",ex9.toString(),Controller9));
-        //TODO TEST 8
+        
         menu.show();
     }
 }
