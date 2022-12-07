@@ -185,11 +185,13 @@ public class Interpreter {
                 new CompoundStmt(new AssignStmt("v", new ValueExpression(new IntValue(32))),
                 new CompoundStmt(new PrintStmt(new VariableExpression("v")),
                 new PrintStmt(new ReadHeapExpression(new VariableExpression("a"))))))),
+                new AssignStmt("v", new ArithmeticExpression('-', new VariableExpression("v"), new ValueExpression(new IntValue(1))))),
                 new CompoundStmt(new PrintStmt(new VariableExpression("v")),
-                new PrintStmt(new ReadHeapExpression(new VariableExpression("a")))))),
-                new AssignStmt("v", new ArithmeticExpression('-', new VariableExpression("v"), new ValueExpression(new IntValue(1)))),
-                        new CompoundStmt(new PrintStmt(new VariableExpression("v")),
-                                new PrintStmt(new ReadHeapExpression(new VariableExpression("a")))))))));
+                new CompoundStmt(new PrintStmt(new VariableExpression("v")),
+                new PrintStmt(new ReadHeapExpression(new VariableExpression("a"))));
+//                new PrintStmt(new ReadHeapExpression(new VariableExpression("a"))))),
+//                new AssignStmt("v", new ArithmeticExpression('-', new VariableExpression("v"), new ValueExpression(new IntValue(1)))),
+
 
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0", "exit"));
