@@ -147,7 +147,7 @@ public class Interpreter {
         Ref int a;
         v=10;
         new(a,22);
-        fork(wH(a,30);v=32;print(v);print(rH(a)));
+        thread(wH(a,30);v=32;print(v);print(rH(a)));
         print(v);
         print(rH(a));
         */
@@ -164,6 +164,32 @@ public class Interpreter {
         ProgramState State8 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex8);
         Repository Repo8 = new Repository(State8, "log8.txt");
         Controller Controller8 = new Controller(Repo8);
+
+        /*
+        int v;
+        Ref int a;
+        v=10;
+        new(a,22);
+        (while (v>0) thread(wH(a,v-1);print(rH(a)));v=v-1);
+
+
+        print(v);
+        print(rH(a));
+        */
+        IStmt ex9 = new CompoundStmt(new VariableDeclarationStmt("v", new IntType()),
+                new CompoundStmt(new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
+                new CompoundStmt(new AssignStmt("v", new ValueExpression(new IntValue(10))),
+                new CompoundStmt(new NewStmt("a", new ValueExpression(new IntValue(22))),
+                new CompoundStmt(new WhileStmt(new LogicExpression(new VariableExpression("v"), new ValueExpression(new IntValue(0)), ">"),
+                new CompoundStmt(new ThreadStmt(new CompoundStmt(new WriteHeapStmt("a", new ValueExpression(new IntValue(30))),
+                new CompoundStmt(new AssignStmt("v", new ValueExpression(new IntValue(32))),
+                new CompoundStmt(new PrintStmt(new VariableExpression("v")),
+                new PrintStmt(new ReadHeapExpression(new VariableExpression("a"))))))),
+                new CompoundStmt(new PrintStmt(new VariableExpression("v")),
+                new PrintStmt(new ReadHeapExpression(new VariableExpression("a")))))),
+                new AssignStmt("v", new ArithmeticExpression('-', new VariableExpression("v"), new ValueExpression(new IntValue(1)))),
+                        new CompoundStmt(new PrintStmt(new VariableExpression("v")),
+                                new PrintStmt(new ReadHeapExpression(new VariableExpression("a")))))))));
 
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0", "exit"));
