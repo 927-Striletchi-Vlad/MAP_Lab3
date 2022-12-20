@@ -4,6 +4,7 @@ import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyHeapInterface;
 import Model.Type.BoolType;
 import Model.Type.IntType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.Value;
@@ -81,5 +82,30 @@ public class LogicExpression implements Expression{
                 ", e2=" + e2 +
                 ", op=" + op +
                 '}';
+    }
+    @Override
+    public Type typeCheck(MyDictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type type1, type2;
+        type1 = e1.typeCheck(typeEnv);
+        type2 = e2.typeCheck(typeEnv);
+        if (type1.equals(new IntType())){
+            if (type2.equals(new IntType())){
+                return new IntType();
+            }
+            else{
+                throw new MyException("Second operand is not an integer.");
+            }
+        }
+        else if (type1.equals(new BoolType())){
+            if (type2.equals(new BoolType())){
+                return new BoolType();
+            }
+            else{
+                throw new MyException("Second operand is not a boolean.");
+            }
+        }
+        else{
+            throw new MyException("First operand is not an integer or a boolean.");
+        }
     }
 }

@@ -1,6 +1,8 @@
 package Model.Statement;
 
+import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyStack;
+import Model.Type.Type;
 import Model.ProgramState;
 import Exception.MyException;
 
@@ -50,5 +52,11 @@ public class CompoundStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new CompoundStmt(first.deepCopy(), second.deepCopy());
+    }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        return second.typeCheck(first.typeCheck(typeEnv));
     }
 }

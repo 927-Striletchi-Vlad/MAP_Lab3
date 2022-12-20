@@ -1,6 +1,8 @@
 package Model.Statement;
 
 import Model.ProgramState;
+import Model.ADT.MyDictionaryInterface;
+import Model.Type.Type;
 import Exception.MyException;
 
 public class NoOperationStmt implements IStmt{
@@ -17,5 +19,11 @@ public class NoOperationStmt implements IStmt{
     @Override
     public String toString() {
         return "NoOperationStatement{}";
+    }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        return typeEnv;
     }
 }

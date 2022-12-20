@@ -6,6 +6,7 @@ import Model.Expression.Expression;
 import Model.ProgramState;
 import Exception.MyException;
 import Model.Type.ReferenceType;
+import Model.Type.Type;
 import Model.Value.ReferenceValue;
 import Model.Value.Value;
 
@@ -47,5 +48,18 @@ public class NewStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new NewStmt(varName, expression.deepCopy());
+    }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        Type typeVar = typeEnv.lookup(varName);
+        Type typeExpression = expression.typeCheck(typeEnv);
+        if(typeVar.equals(new ReferenceType(typeExpression))){
+            return typeEnv;
+        }
+        else{
+            throw new MyException("NewStmt: right hand side and left hand side have different types");
+        }
     }
 }

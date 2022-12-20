@@ -1,6 +1,7 @@
 package View;
 
 import Controller.Controller;
+import Exception.MyException;
 import Model.ADT.*;
 import Model.Command.ExitCommand;
 import Model.Command.RunExample;
@@ -11,6 +12,7 @@ import Model.Type.BoolType;
 import Model.Type.IntType;
 import Model.Type.ReferenceType;
 import Model.Type.StringType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.IntValue;
 import Model.Value.StringValue;
@@ -29,6 +31,13 @@ public class Interpreter {
          * */
         IStmt ex1 = new CompoundStmt(new VariableDeclarationStmt("v", new IntType()),
                 new CompoundStmt(new AssignStmt("v", new ValueExpression(new IntValue(2))), new PrintStmt(new VariableExpression("v"))));
+        try{
+            ex1.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex1: "+e.getMessage());
+            return;
+        }
         ProgramState State1 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex1);
         Repository Repo1 = new Repository(State1, "log1.txt");
         Controller Controller1 = new Controller(Repo1);
@@ -47,6 +56,13 @@ public class Interpreter {
                 new ArithmeticExpression('*',new ValueExpression(new IntValue(3)), new ValueExpression(new IntValue(5))))),
                 new CompoundStmt(new AssignStmt("b",new ArithmeticExpression('+',new VariableExpression("a"), new ValueExpression(new IntValue(1)))),
                 new PrintStmt(new VariableExpression("b"))))));
+        try{
+            ex2.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex2: "+e.getMessage());
+            return;
+        }
         ProgramState State2 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex2);
         Repository Repo2 = new Repository(State2, "log2.txt");
         Controller Controller2 = new Controller(Repo2);
@@ -63,6 +79,13 @@ public class Interpreter {
                 new CompoundStmt(new VariableDeclarationStmt("v", new IntType()),new CompoundStmt(new AssignStmt("a", new ValueExpression(new BoolValue(true))),
                 new CompoundStmt(new IfStmt(new VariableExpression("a"),new AssignStmt("v",new ValueExpression(new IntValue(2))),
                 new AssignStmt("v", new ValueExpression(new IntValue(3)))), new PrintStmt(new VariableExpression("v"))))));
+        try{
+            ex3.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex3: "+e.getMessage());
+            return;
+        }
         ProgramState State3 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(), new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(),ex3);
         Repository Repo3 = new Repository(State3, "log3.txt");
         Controller Controller3 = new Controller(Repo3);
@@ -88,6 +111,13 @@ public class Interpreter {
                 new CompoundStmt(new ReadFileStmt(new VariableExpression("varf"), new StringValue("varc")),
                 new CompoundStmt(new PrintStmt(new VariableExpression("varc")),
                 new CloseReadFileStmt(new VariableExpression("varf"))))))))));
+        try{
+            ex4.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex4: "+e.getMessage());
+            return;
+        }
         ProgramState State4 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(), new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(),ex4);
         Repository Repo4 = new Repository(State4, "log4.txt");
         Controller Controller4 = new Controller(Repo4);
@@ -108,6 +138,13 @@ public class Interpreter {
                 new CompoundStmt(new NewStmt("a", new VariableExpression("v")),
                 new CompoundStmt(new PrintStmt(new ReadHeapExpression(new VariableExpression("v"))),
                 new PrintStmt(new ArithmeticExpression('+', new ReadHeapExpression(new ReadHeapExpression(new VariableExpression("a"))), new ValueExpression(new IntValue(5)))))))));
+        try{
+            ex5.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex5: "+e.getMessage());
+            return;
+        }
         ProgramState State5 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex5);
         Repository Repo5 = new Repository(State5, "log5.txt");
         Controller Controller5 = new Controller(Repo5);
@@ -124,6 +161,13 @@ public class Interpreter {
                 new CompoundStmt(new PrintStmt(new ReadHeapExpression(new VariableExpression("v"))),
                 new CompoundStmt(new WriteHeapStmt("v", new ValueExpression(new IntValue(30))),
                 new PrintStmt(new ArithmeticExpression('+', new ReadHeapExpression(new VariableExpression("v")), new ValueExpression(new IntValue(5))))))));
+        try{
+            ex6.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex6: "+e.getMessage());
+            return;
+        }
         ProgramState State6 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex6);
         Repository Repo6 = new Repository(State6, "log6.txt");
         Controller Controller6 = new Controller(Repo6);
@@ -138,6 +182,13 @@ public class Interpreter {
                 new CompoundStmt(new WhileStmt(new LogicExpression(new VariableExpression("v"), new ValueExpression(new IntValue(0)), ">"),
                 new CompoundStmt(new PrintStmt(new VariableExpression("v")), new AssignStmt("v", new ArithmeticExpression('-', new VariableExpression("v"), new ValueExpression(new IntValue(1)))))),
                 new PrintStmt(new VariableExpression("v")))));
+        try{
+            ex7.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex7: "+e.getMessage());
+            return;
+        }
         ProgramState State7 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex7);
         Repository Repo7 = new Repository(State7, "log7.txt");
         Controller Controller7 = new Controller(Repo7);
@@ -161,6 +212,13 @@ public class Interpreter {
                 new PrintStmt(new ReadHeapExpression(new VariableExpression("a"))))))),
                 new CompoundStmt(new PrintStmt(new VariableExpression("v")),
                 new PrintStmt(new ReadHeapExpression(new VariableExpression("a")))))))));
+        try{
+            ex8.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex8: "+e.getMessage());
+            return;
+        }
         ProgramState State8 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex8);
         Repository Repo8 = new Repository(State8, "log8.txt");
         Controller Controller8 = new Controller(Repo8);
@@ -182,6 +240,13 @@ public class Interpreter {
                 new CompoundStmt(new ThreadStmt(new CompoundStmt(new WriteHeapStmt("a", new ReadHeapExpression(new VariableExpression("v"))),
                 new PrintStmt(new ReadHeapExpression(new VariableExpression("a"))))),
                 new WriteHeapStmt("v", new ArithmeticExpression('-', new ReadHeapExpression(new VariableExpression("v")), new ValueExpression(new IntValue(1))))))))));
+        try{
+            ex9.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex9: "+e.getMessage());
+            return;
+        }
         ProgramState State9 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex9);
         Repository Repo9 = new Repository(State9, "log9.txt");
         Controller Controller9 = new Controller(Repo9);

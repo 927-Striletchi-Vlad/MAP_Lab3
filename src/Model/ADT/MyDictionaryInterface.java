@@ -1,5 +1,7 @@
 package Model.ADT;
 
+import Model.Type.Type;
+import Model.Value.Value;
 
 public interface MyDictionaryInterface<TKey, TValue> {
     public void add(TKey k, TValue v);
@@ -13,5 +15,7 @@ public interface MyDictionaryInterface<TKey, TValue> {
     public boolean isDefined(String id);
 
     public String toString();
+
+    public MyDictionaryInterface<TKey, TValue> deepCopy();
 }
 

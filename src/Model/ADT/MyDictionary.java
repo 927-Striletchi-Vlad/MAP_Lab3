@@ -2,6 +2,9 @@ package Model.ADT;
 
 import java.util.HashMap;
 
+import Model.Type.Type;
+import Model.Value.Value;
+
 public class MyDictionary<TKey, TValue> implements MyDictionaryInterface<TKey, TValue> {
     HashMap<TKey, TValue> dictionary;
 
@@ -52,7 +55,7 @@ public class MyDictionary<TKey, TValue> implements MyDictionaryInterface<TKey, T
         return dictionary;
     }
 
-    public MyDictionary<TKey, TValue> deepCopy() {
-        return new MyDictionary<TKey, TValue>((HashMap<TKey, TValue>)dictionary.clone());
+    public MyDictionaryInterface<TKey, TValue> deepCopy() {
+        return (MyDictionaryInterface<TKey, TValue>) new MyDictionary<TKey, TValue>((HashMap<TKey, TValue>)dictionary.clone());
     }
 }

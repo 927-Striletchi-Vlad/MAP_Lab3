@@ -41,4 +41,16 @@ public class AssignStmt implements IStmt{
     public IStmt deepCopy() {
         return new AssignStmt(id.toString(), expression.deepCopy());
     }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        Type typeVar = typeEnv.lookup(id);
+        Type typeExp = expression.typeCheck(typeEnv);
+        if (typeVar.equals(typeExp)) {
+            return typeEnv;
+        } else {
+            throw new MyException("Assignment: right hand side and left hand side have different types");
+        }
+    }
 }

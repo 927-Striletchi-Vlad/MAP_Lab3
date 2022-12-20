@@ -4,6 +4,7 @@ import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyHeapInterface;
 import Model.Type.IntType;
 import Model.Type.ReferenceType;
+import Model.Type.Type;
 import Model.Value.ReferenceValue;
 import Model.Value.Value;
 import Exception.MyException;
@@ -43,5 +44,17 @@ public class ReadHeapExpression implements Expression{
     @Override
     public Expression deepCopy() {
         return new ReadHeapExpression(expression.deepCopy());
+    }
+
+
+    @Override
+    public Type typeCheck(MyDictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type typeExpression = expression.typeCheck(typeEnv);
+        if (typeExpression instanceof ReferenceType) {
+            ReferenceType referenceType = (ReferenceType) typeExpression;
+            return referenceType.getInner();
+        }
+        else
+            throw new MyException("The rH argument is not a Reference Type");
     }
 }

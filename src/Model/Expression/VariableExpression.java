@@ -2,6 +2,7 @@ package Model.Expression;
 
 import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyHeapInterface;
+import Model.Type.Type;
 import Model.Value.Value;
 import Exception.MyException;
 
@@ -27,5 +28,10 @@ public class VariableExpression implements Expression{
         return "VariableExpression{" +
                 "id='" + id + '\'' +
                 '}';
+    }
+
+    @Override
+    public Type typeCheck(MyDictionaryInterface<String, Type> typeEnv) throws MyException {
+        return typeEnv.lookup(id);
     }
 }

@@ -4,6 +4,7 @@ import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyHeapInterface;
 import Model.ADT.MyListInterface;
 import Model.Expression.Expression;
+import Model.Type.Type;
 import Model.ProgramState;
 import Exception.MyException;
 import Model.Value.Value;
@@ -31,5 +32,12 @@ public class PrintStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new PrintStmt(expression.deepCopy());
+    }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        expression.typeCheck(typeEnv);
+        return typeEnv;
     }
 }

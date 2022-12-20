@@ -1,10 +1,12 @@
 package Model.Statement;
 
+import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyStack;
 import Model.Expression.Expression;
 import Model.ProgramState;
 import Exception.MyException;
 import Model.Type.BoolType;
+import Model.Type.Type;
 import Model.Value.BoolValue;
 import Model.Value.Value;
 
@@ -44,5 +46,12 @@ public class WhileStmt implements IStmt {
     @Override
     public IStmt deepCopy() {
         return new WhileStmt(expression.deepCopy(), statement.deepCopy());
+    }
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        statement.typeCheck(typeEnv.deepCopy());
+        expression.typeCheck(typeEnv.deepCopy());
+        return typeEnv;
     }
 }

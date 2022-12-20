@@ -7,6 +7,7 @@ import Model.ProgramState;
 import Exception.MyException;
 import Model.Type.IntType;
 import Model.Type.StringType;
+import Model.Type.Type;
 import Model.Value.IntValue;
 import Model.Value.StringValue;
 import Model.Value.Value;
@@ -75,5 +76,17 @@ public class ReadFileStmt implements IStmt{
                 "expression=" + expression +
                 ", variableName=" + variableName +
                 '}';
+    }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        Type typeExpression = expression.typeCheck(typeEnv);
+        if(typeExpression.equals(new StringType())){
+            return typeEnv;
+        }
+        else{
+            throw new MyException("Expression is not of type StringType.");
+        }
     }
 }

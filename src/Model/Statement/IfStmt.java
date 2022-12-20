@@ -1,7 +1,10 @@
 package Model.Statement;
 
 import Model.Expression.Expression;
+import Model.Type.BoolType;
+import Model.Type.Type;
 import Model.ProgramState;
+import Model.ADT.MyDictionaryInterface;
 import Exception.MyException;
 import Model.Value.BoolValue;
 
@@ -40,5 +43,19 @@ public class IfStmt implements IStmt{
     @Override
     public IStmt deepCopy() {
         return new IfStmt(expression.deepCopy(),thenS.deepCopy(), elseS.deepCopy());
+    }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        Type typeExpression = expression.typeCheck(typeEnv);
+        if(typeExpression instanceof BoolType){
+            thenS.typeCheck(typeEnv.deepCopy());
+            elseS.typeCheck(typeEnv.deepCopy());
+            return typeEnv;
+        }
+        else{
+            throw new MyException("The condition of IF is not bool type");
+        }
     }
 }

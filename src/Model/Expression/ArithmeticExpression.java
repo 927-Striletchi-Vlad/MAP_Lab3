@@ -3,6 +3,7 @@ package Model.Expression;
 import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyHeapInterface;
 import Model.Type.IntType;
+import Model.Type.Type;
 import Model.Value.IntValue;
 import Model.Value.Value;
 import Exception.MyException;
@@ -78,4 +79,23 @@ public class ArithmeticExpression implements Expression{
     public Expression deepCopy() {
         return new ArithmeticExpression(op, e1, e2);
     }
+
+    @Override
+    public Type typeCheck(MyDictionaryInterface<String, Type> typeEnv) throws MyException {
+        Type type1, type2;
+        type1=e1.typeCheck(typeEnv);
+        type2=e2.typeCheck(typeEnv);
+        if (type1.equals(new IntType())){
+            if (type2.equals(new IntType())){
+                return new IntType();
+            } 
+            else{
+                throw new MyException("second operand is not an integer");
+            }
+        }
+        else{
+            throw new MyException("first operand is not an integer");
+        } 
+    }
+
 }

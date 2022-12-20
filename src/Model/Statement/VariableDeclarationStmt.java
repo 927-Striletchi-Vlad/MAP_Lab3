@@ -35,4 +35,11 @@ public class VariableDeclarationStmt implements IStmt{
                 ", type=" + type +
                 '}';
     }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        typeEnv.add(name, type);
+        return typeEnv;
+    }
 }

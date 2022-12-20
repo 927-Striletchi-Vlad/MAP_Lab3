@@ -2,7 +2,9 @@ package Model.Statement;
 
 import Exception.MyException;
 import Model.ProgramState;
+import Model.ADT.MyDictionaryInterface;
 import Model.ADT.MyStack;
+import Model.Type.Type;
 
 public class ThreadStmt implements IStmt{
     private IStmt stmt;
@@ -30,9 +32,16 @@ public class ThreadStmt implements IStmt{
             state.getFileTable(),
             state.getOutput(),
             state.getHeap(),
-            stmt.deepCopy());    
+            stmt.deepCopy());
 
         return newState;
+    }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        stmt.typeCheck(typeEnv.deepCopy());
+        return typeEnv;
     }
     
 }

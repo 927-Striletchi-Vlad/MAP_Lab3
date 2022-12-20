@@ -5,6 +5,7 @@ import Model.Expression.Expression;
 import Model.ProgramState;
 import Exception.MyException;
 import Model.Type.StringType;
+import Model.Type.Type;
 import Model.Value.StringValue;
 import Model.Value.Value;
 
@@ -50,5 +51,15 @@ public class OpenReadFileStmt implements IStmt{
         return "OpenReadFileStmt{" +
                 "expression=" + expression +
                 '}';
+    }
+
+    @Override
+    public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
+    throws MyException {
+        Type typeExpression = expression.typeCheck(typeEnv);
+        if(typeExpression.equals(new StringType())){
+            return typeEnv;
+        }
+        throw new MyException("Expression does not contain a StringValue.");
     }
 }
