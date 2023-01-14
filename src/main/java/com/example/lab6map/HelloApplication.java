@@ -79,8 +79,10 @@ public class HelloApplication extends Application {
     }
 
     public ProgramState getCurrProgramState() throws MyException {
-        return currController.getProgramStateById(currProgramStateId);
+//        return currController.getProgramStateById(currProgramStateId);
+        return currController.getProgramStates().get(0);
     }
+
 
     public ProgramState getProgramStateById(int id) throws MyException {
         return currController.getProgramStateById(id);
@@ -410,7 +412,7 @@ public class HelloApplication extends Application {
 
                                     exeStackList.clear();
                                     try {
-                                        for (IStmt stmt : getCurrProgramState().getStack().getContent()) {
+                                        for (IStmt stmt : getProgramStateById(currProgramStateId).getStack().getContent()) {
                                             exeStackList.add(stmt.toString());
                                         }
                                     } catch (MyException e) {
@@ -427,7 +429,7 @@ public class HelloApplication extends Application {
                             @Override
                             public void handle(ActionEvent event) {
 
-                                cleanup();
+                                //cleanup();
                                 oneStepNoCleanup();
 
 
