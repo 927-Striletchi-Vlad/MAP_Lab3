@@ -2,7 +2,7 @@ package Model.ADT;
 
 import java.util.HashMap;
 
-public class MyHeap<TKey extends Integer, TValue> implements MyHeapInterface<TKey, TValue>{
+public class MyHeap<TKey extends Integer, TValue> implements MyHeapInterface<TKey,TValue> {
     HashMap<TKey, TValue> heap;
     int freeAddress;
 
@@ -54,6 +54,11 @@ public class MyHeap<TKey extends Integer, TValue> implements MyHeapInterface<TKe
         int res = freeAddress;
         freeAddress = firstFreeAddress();
         return res;
+    }
+
+    @Override
+    public HashMap<TKey, TValue> getContent() {
+        return heap;
     }
 
     private int firstFreeAddress() {

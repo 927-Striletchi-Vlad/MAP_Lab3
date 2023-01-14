@@ -10,4 +10,6 @@ public interface MyListInterface<TElem> {
     public String toString();
 
     public List<TElem> getList();
+
+    List<TElem> getContent();
 }

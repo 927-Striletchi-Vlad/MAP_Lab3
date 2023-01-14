@@ -40,6 +40,10 @@ public class ProgramState {
         return heap;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public MyListInterface<Value> getOutput() {
         return output;
     }
@@ -74,7 +78,8 @@ public class ProgramState {
 
     public ProgramState oneStep() throws MyException{
         if (exeStack.isEmpty()){
-            throw new MyException("execution stack is empty.");
+//            throw new MyException("execution stack is empty.");
+            return null;
         }
         IStmt currentStatement = exeStack.pop();
         return currentStatement.execute(this);
@@ -101,5 +106,9 @@ public class ProgramState {
         res=res.concat(output.toString());
 
         return res;
+    }
+
+    public boolean isCompleted() {
+        return exeStack.isEmpty();
     }
 }

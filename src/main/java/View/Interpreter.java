@@ -234,6 +234,7 @@ public class Interpreter {
         */
         IStmt ex9 = new CompoundStmt(new VariableDeclarationStmt("v", new ReferenceType(new IntType())),
                 new CompoundStmt(new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
+                //new CompoundStmt(new VariableDeclarationStmt("a", new ReferenceType(new BoolType())),
                 new CompoundStmt(new NewStmt("v", new ValueExpression(new IntValue(10))),
                 new CompoundStmt(new NewStmt("a", new ValueExpression(new IntValue(22))),
                 new WhileStmt(new LogicExpression(new ReadHeapExpression(new VariableExpression("v")), new ValueExpression(new IntValue(0)), ">"),

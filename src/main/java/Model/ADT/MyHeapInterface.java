@@ -1,5 +1,7 @@
 package Model.ADT;
 
+import java.util.HashMap;
+
 public interface MyHeapInterface<TKey extends Integer, TValue> {
 
     public void add(TKey k, TValue v);
@@ -17,4 +19,6 @@ public interface MyHeapInterface<TKey extends Integer, TValue> {
  *  return the address where it was added
  */
     public int allocate(TValue v);
+
+    HashMap<TKey, TValue> getContent();
 }

@@ -33,4 +33,9 @@ public class MyList<TElem> implements MyListInterface<TElem>{
     public List<TElem> getList() {
         return list;
     }
+
+    @Override
+    public List<TElem> getContent() {
+        return list;
+    }
 }

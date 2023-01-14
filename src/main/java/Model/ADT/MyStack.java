@@ -42,4 +42,8 @@ public class MyStack<TElem> implements MyStackInterface<TElem>{
         }
         return result;
     }
+
+    public Stack<TElem> getContent() {
+        return stack;
+    }
 }
