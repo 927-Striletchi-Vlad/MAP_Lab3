@@ -354,6 +354,44 @@ public class HelloApplication extends Application {
          lock(x);wh(v1,rh(v1)-1);unlock(x)
          );
          lock(x);wh(v1,rh(v1)*10);unlock(x)
+        );
+        lock(x); print(rh(v1)); unlock(x);
+        * */
+        IStmt ex11 = new CompoundStmt(new VariableDeclarationStmt("v1", new ReferenceType(new IntType())),
+                new CompoundStmt(new VariableDeclarationStmt("v2", new ReferenceType(new IntType())),
+                        new CompoundStmt(new VariableDeclarationStmt("x", new IntType()),
+                                new CompoundStmt(new VariableDeclarationStmt("q", new IntType()),
+                                        new CompoundStmt(new NewStmt("v1", new ValueExpression(new IntValue(20))),
+                                                new CompoundStmt(new NewStmt("v2", new ValueExpression(new IntValue(30))),
+                                                        new CompoundStmt(new NewLockStmt("x"),
+                                                                new CompoundStmt(new ThreadStmt(new CompoundStmt(new ThreadStmt(new CompoundStmt(new LockStmt("x"),
+                                                                        new CompoundStmt(new WriteHeapStmt("v1", new ArithmeticExpression('-', new ReadHeapExpression(new VariableExpression("v1")), new ValueExpression(new IntValue(1)))),
+                                                                                new UnlockStmt("x")))),
+                                                                        new CompoundStmt(new LockStmt("x"),
+                                                                                new CompoundStmt(new WriteHeapStmt("v1", new ArithmeticExpression('*', new ReadHeapExpression(new VariableExpression("v1")), new ValueExpression(new IntValue(10)))),
+                                                                                        new UnlockStmt("x"))))),
+                                                                        new CompoundStmt(new LockStmt("x"),
+                                                                                new CompoundStmt(new PrintStmt(new ReadHeapExpression(new VariableExpression("v1"))),
+                                                                                        new UnlockStmt("x")))))))))));
+        try{
+            ex11.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex11: "+e.getMessage());
+            return;
+        }
+        ProgramState State11 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex11, new MyLockHeap<Integer, Value>());
+        Repository Repo11 = new Repository(State11, "log11.txt");
+        Controller Controller11 = new Controller(Repo11);
+
+        /*
+        Ref int v1; Ref int v2; int x; int q;
+        new(v1,20);new(v2,30);newLock(x);
+        fork(
+         fork(
+         lock(x);wh(v1,rh(v1)-1);unlock(x)
+         );
+         lock(x);wh(v1,rh(v1)*10);unlock(x)
         );newLock(q);
         fork(
          fork(lock(q);wh(v2,rh(v2)+5);unlock(q));
@@ -363,6 +401,47 @@ public class HelloApplication extends Application {
         lock(x); print(rh(v1)); unlock(x);
         lock(q); print(rh(v2)); unlock(q);
         * */
+        IStmt ex12 = new CompoundStmt(new VariableDeclarationStmt("v1", new ReferenceType(new IntType())),
+                new CompoundStmt(new VariableDeclarationStmt("v2", new ReferenceType(new IntType())),
+                        new CompoundStmt(new VariableDeclarationStmt("x", new IntType()),
+                                new CompoundStmt(new VariableDeclarationStmt("q", new IntType()),
+                                        new CompoundStmt(new NewStmt("v1", new ValueExpression(new IntValue(20))),
+                                                new CompoundStmt(new NewStmt("v2", new ValueExpression(new IntValue(30))),
+                                                        new CompoundStmt(new NewLockStmt("x"),
+                                                                new CompoundStmt(new ThreadStmt(new CompoundStmt(new ThreadStmt(new CompoundStmt(new LockStmt("x"),
+                                                                        new CompoundStmt(new WriteHeapStmt("v1", new ArithmeticExpression('-', new ReadHeapExpression(new VariableExpression("v1")), new ValueExpression(new IntValue(1)))),
+                                                                                new UnlockStmt("x")))),
+                                                                        new CompoundStmt(new LockStmt("x"),
+                                                                                new CompoundStmt(new WriteHeapStmt("v1", new ArithmeticExpression('*', new ReadHeapExpression(new VariableExpression("v1")), new ValueExpression(new IntValue(10)))),
+                                                                                        new UnlockStmt("x"))))),
+                                                                        new CompoundStmt(new NewLockStmt("q"),
+                                                                                new CompoundStmt(new ThreadStmt(new CompoundStmt(new ThreadStmt(new CompoundStmt(new LockStmt("q"),
+                                                                                        new CompoundStmt(new WriteHeapStmt("v2", new ArithmeticExpression('+', new ReadHeapExpression(new VariableExpression("v2")), new ValueExpression(new IntValue(5)))),
+                                                                                                new UnlockStmt("q")))),
+                                                                                        new CompoundStmt(new LockStmt("q"),
+                                                                                                new CompoundStmt(new WriteHeapStmt("v2", new ArithmeticExpression('*', new ReadHeapExpression(new VariableExpression("v2")), new ValueExpression(new IntValue(10)))),
+                                                                                                        new UnlockStmt("q"))))),
+                                                                                        new CompoundStmt(new NoOperationStmt(),
+                                                                                                new CompoundStmt(new NoOperationStmt(),
+                                                                                                        new CompoundStmt(new NoOperationStmt(),
+                                                                                                                new CompoundStmt(new NoOperationStmt(),
+                                                                                                                        new CompoundStmt(new LockStmt("x"),
+                                                                                                                                new CompoundStmt(new PrintStmt(new ReadHeapExpression(new VariableExpression("v1"))),
+                                                                                                                                        new CompoundStmt(new UnlockStmt("x"),
+                                                                                                                                                new CompoundStmt(new LockStmt("q"),
+                                                                                                                                                        new CompoundStmt(new PrintStmt(new ReadHeapExpression(new VariableExpression("v2"))),
+                                                                                                                                                                new UnlockStmt("q"))))))))))))))))))));
+        try{
+            ex12.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex12: "+e.getMessage());
+            return;
+        }
+        ProgramState State12 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex12, new MyLockHeap<Integer, Value>());
+        Repository Repo12 = new Repository(State12, "log12.txt");
+        Controller Controller12 = new Controller(Repo12);
+
 
 
 
@@ -379,6 +458,8 @@ public class HelloApplication extends Application {
         controllers.put("Ex8 " + ex8.toString(), Controller8);
         controllers.put("Ex9 " + ex9.toString(), Controller9);
         controllers.put("Ex10 " + ex10.toString(), Controller10);
+        controllers.put("Ex11 " + ex11.toString(), Controller11);
+        controllers.put("Ex12 " + ex12.toString(), Controller12);
 
         names.addAll(controllers.keySet());
 
