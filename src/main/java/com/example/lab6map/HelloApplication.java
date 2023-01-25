@@ -3,6 +3,7 @@ package com.example.lab6map;
 import Controller.Controller;
 import Exception.MyException;
 import GuiClasses.HeapTableEntry;
+import GuiClasses.LockTableEntry;
 import Model.ADT.*;
 import Model.Expression.*;
 import Model.ProgramState;
@@ -109,7 +110,7 @@ public class HelloApplication extends Application {
             System.out.println("ex1: "+e.getMessage());
             return;
         }
-        ProgramState State1 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex1);
+        ProgramState State1 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(), new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex1, new MyLockHeap<Integer, Value>());
         Repository Repo1 = new Repository(State1, "log1.txt");
         Controller Controller1 = new Controller(Repo1);
         /*
@@ -134,7 +135,7 @@ public class HelloApplication extends Application {
             System.out.println("ex2: "+e.getMessage());
             return;
         }
-        ProgramState State2 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex2);
+        ProgramState State2 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(), new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex2, new MyLockHeap<Integer, Value>());
         Repository Repo2 = new Repository(State2, "log2.txt");
         Controller Controller2 = new Controller(Repo2);
         /*
@@ -157,7 +158,7 @@ public class HelloApplication extends Application {
             System.out.println("ex3: "+e.getMessage());
             return;
         }
-        ProgramState State3 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(), new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(),ex3);
+        ProgramState State3 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(), new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex3, new MyLockHeap<Integer, Value>());
         Repository Repo3 = new Repository(State3, "log3.txt");
         Controller Controller3 = new Controller(Repo3);
         /*
@@ -189,7 +190,7 @@ public class HelloApplication extends Application {
             System.out.println("ex4: "+e.getMessage());
             return;
         }
-        ProgramState State4 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(), new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(),ex4);
+        ProgramState State4 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(), new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(),ex4, new MyLockHeap<Integer, Value>());
         Repository Repo4 = new Repository(State4, "log4.txt");
         Controller Controller4 = new Controller(Repo4);
 
@@ -216,7 +217,7 @@ public class HelloApplication extends Application {
             System.out.println("ex5: "+e.getMessage());
             return;
         }
-        ProgramState State5 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex5);
+        ProgramState State5 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex5, new MyLockHeap<Integer, Value>());
         Repository Repo5 = new Repository(State5, "log5.txt");
         Controller Controller5 = new Controller(Repo5);
 
@@ -239,7 +240,7 @@ public class HelloApplication extends Application {
             System.out.println("ex6: "+e.getMessage());
             return;
         }
-        ProgramState State6 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex6);
+        ProgramState State6 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex6, new MyLockHeap<Integer, Value>());
         Repository Repo6 = new Repository(State6, "log6.txt");
         Controller Controller6 = new Controller(Repo6);
         /*
@@ -260,7 +261,7 @@ public class HelloApplication extends Application {
             System.out.println("ex7: "+e.getMessage());
             return;
         }
-        ProgramState State7 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex7);
+        ProgramState State7 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex7, new MyLockHeap<Integer, Value>());
         Repository Repo7 = new Repository(State7, "log7.txt");
         Controller Controller7 = new Controller(Repo7);
 
@@ -290,7 +291,7 @@ public class HelloApplication extends Application {
             System.out.println("ex8: "+e.getMessage());
             return;
         }
-        ProgramState State8 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex8);
+        ProgramState State8 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex8, new MyLockHeap<Integer, Value>());
         Repository Repo8 = new Repository(State8, "log8.txt");
         Controller Controller8 = new Controller(Repo8);
 
@@ -319,9 +320,51 @@ public class HelloApplication extends Application {
             System.out.println("ex9: "+e.getMessage());
             return;
         }
-        ProgramState State9 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex9);
+        ProgramState State9 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex9, new MyLockHeap<Integer, Value>());
         Repository Repo9 = new Repository(State9, "log9.txt");
         Controller Controller9 = new Controller(Repo9);
+
+        /*
+        Ref int a; new(a,20);
+        (for(v=0;v<3;v=v+1) fork(print(v);v=v*rh(a)));
+        print(rh(a));
+         */
+        IStmt ex10 = new CompoundStmt(new VariableDeclarationStmt("a", new ReferenceType(new IntType())),
+                new CompoundStmt(new NewStmt("a", new ValueExpression(new IntValue(20))),
+                        new CompoundStmt(new ForStmt("v", new ValueExpression(new IntValue(0)), new ValueExpression(new IntValue(3)), new ArithmeticExpression('+', new VariableExpression("v"), new ValueExpression(new IntValue(1))),
+                                new ThreadStmt(new CompoundStmt(new PrintStmt(new VariableExpression("v")),
+                                        new AssignStmt("v", new ArithmeticExpression('*', new VariableExpression("v"), new ReadHeapExpression(new VariableExpression("a"))))))
+                                        ),new PrintStmt(new ReadHeapExpression(new VariableExpression("a"))) )));
+        try{
+            ex10.typeCheck(new MyDictionary<String, Type>());
+        }
+        catch(MyException e){
+            System.out.println("ex10: "+e.getMessage());
+            return;
+        }
+        ProgramState State10 = new ProgramState(new MyStack<IStmt>(), new MyDictionary<String, Value>(),new MyDictionary<StringValue, BufferedReader>(), new MyList<Value>(), new MyHeap<Integer, Value>(), ex10, new MyLockHeap<Integer, Value>());
+        Repository Repo10 = new Repository(State10, "log10.txt");
+        Controller Controller10 = new Controller(Repo10);
+
+        /*
+        Ref int v1; Ref int v2; int x; int q;
+        new(v1,20);new(v2,30);newLock(x);
+        fork(
+         fork(
+         lock(x);wh(v1,rh(v1)-1);unlock(x)
+         );
+         lock(x);wh(v1,rh(v1)*10);unlock(x)
+        );newLock(q);
+        fork(
+         fork(lock(q);wh(v2,rh(v2)+5);unlock(q));
+         lock(q);wh(v2,rh(v2)*10);unlock(q)
+        );
+        nop;nop;nop;nop;
+        lock(x); print(rh(v1)); unlock(x);
+        lock(q); print(rh(v2)); unlock(q);
+        * */
+
+
 
         //========================================================================
         ObservableList<String> names = FXCollections.observableArrayList();
@@ -335,6 +378,7 @@ public class HelloApplication extends Application {
         controllers.put("Ex7 " + ex7.toString(), Controller7);
         controllers.put("Ex8 " + ex8.toString(), Controller8);
         controllers.put("Ex9 " + ex9.toString(), Controller9);
+        controllers.put("Ex10 " + ex10.toString(), Controller10);
 
         names.addAll(controllers.keySet());
 
@@ -380,7 +424,25 @@ public class HelloApplication extends Application {
                         heapTable.setItems(heapTableEntries);
                         heapTable.getColumns().addAll(heapTableAddress, heapTableValue);
 
-                        Label label3 = new Label("Output:");
+                        Label label3 = new Label("LockTable:");
+
+
+                        TableView<LockTableEntry> lockTable = new TableView<>();
+                        lockTable.setEditable(true);
+                        ObservableList<LockTableEntry> lockTableEntries = FXCollections.observableArrayList();
+                        for (Map.Entry<Integer, Value> entry : currState.getLockHeap().getContent().entrySet()) {
+                            lockTableEntries.add(new LockTableEntry(entry.getKey().toString(), entry.getValue().toString()));
+                        }
+
+                        TableColumn lockTableAddress = new TableColumn<>("Address");
+                        TableColumn lockTableValue = new TableColumn<>("Value");
+                        lockTableAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
+                        lockTableValue.setCellValueFactory(new PropertyValueFactory<>("value"));
+                        lockTable.setItems(lockTableEntries);
+                        lockTable.getColumns().addAll(lockTableAddress, lockTableValue);
+
+
+                        Label label4 = new Label("Output:");
                         ListView<String> output = new ListView<>();
                         ObservableList<String> outputList = FXCollections.observableArrayList();
 
@@ -389,7 +451,7 @@ public class HelloApplication extends Application {
                         }
                         output.setItems(outputList);
 
-                        Label label4 = new Label("All Program States:");
+                        Label label5 = new Label("All Program States:");
                         ListView<String> programStates = new ListView<>();
                         ObservableList<String> programStatesList = FXCollections.observableArrayList();
                         for (ProgramState state : allStates) {
@@ -432,11 +494,11 @@ public class HelloApplication extends Application {
                                 //cleanup();
                                 oneStepNoCleanup();
 
-
                                 if (isActuallyCompleted()) {
                                     outputList.clear();
                                     exeStackList.clear();
                                     heapTableEntries.clear();
+                                    lockTableEntries.clear();
                                     programStatesList.clear();
                                     noProgramStates.clear();
                                     oneStep.setDisable(true);
@@ -483,12 +545,21 @@ public class HelloApplication extends Application {
                                 }
                                 heapTable.setItems(heapTableEntries);
 
+                                lockTableEntries.clear();
+                                try {
+                                    for (Map.Entry<Integer, Value> entry : getCurrProgramState().getLockHeap().getContent().entrySet()) {
+                                        lockTableEntries.add(new LockTableEntry(entry.getKey().toString(), entry.getValue().toString()));
+                                    }
+                                } catch (MyException e) {
+                                    throw new RuntimeException(e);
+                                }
+
                                 cleanup();
                             }
                         });
 
                         VBox layout2 = new VBox(20);
-                        layout2.getChildren().addAll(label1, noProgramStates, label2, heapTable, label3, output, label4, programStates, exeStack, oneStep);
+                        layout2.getChildren().addAll(label1, noProgramStates, label2, heapTable, label3, lockTable, label4, output, label5, programStates, exeStack, oneStep);
                         Scene scene2 = new Scene(layout2, 600, 600);
                         stage2.setScene(scene2);
                         stage2.show();

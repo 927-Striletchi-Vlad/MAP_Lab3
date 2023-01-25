@@ -13,17 +13,19 @@ public class ProgramState {
     private MyDictionaryInterface<StringValue, BufferedReader> fileTable;
     private MyHeapInterface<Integer, Value> heap;
     private MyListInterface<Value> output;
+    private MyLockHeapInterface<Integer, Value> lockHeap;
     private IStmt originalProgram;
     private static int lastId = -1;
     private int id;
 
     public ProgramState(MyStackInterface<IStmt> exeStack, MyDictionaryInterface<String, Value> symTable,
                         MyDictionaryInterface<StringValue, BufferedReader> fileTable, MyListInterface<Value> output,
-                        MyHeapInterface<Integer, Value> heap ,IStmt originalProgram) {
+                        MyHeapInterface<Integer, Value> heap ,IStmt originalProgram, MyLockHeapInterface<Integer, Value> lockHeap) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.fileTable = fileTable;
         this.heap = heap;
+        this.lockHeap = lockHeap;
         this.output = output;
         this.originalProgram = originalProgram.deepCopy();
         exeStack.push(originalProgram);
@@ -56,6 +58,10 @@ public class ProgramState {
         return (MyStack<IStmt>) exeStack;
     }
 
+    public MyStackInterface<IStmt> getExeStack() {
+        return exeStack;
+    }
+
     public MyDictionary<String, Value> getSymbolTable() {
         return (MyDictionary<String, Value>) symTable;
     }
@@ -66,6 +72,14 @@ public class ProgramState {
 
     public void setSymTable(MyDictionaryInterface<String, Value> symTable) {
         this.symTable = symTable;
+    }
+
+    public MyLockHeapInterface<Integer, Value> getLockHeap() {
+        return lockHeap;
+    }
+
+    public void setLockHeap(MyLockHeapInterface<Integer, Value> lockHeap) {
+        this.lockHeap = lockHeap;
     }
 
     public MyDictionaryInterface<StringValue, BufferedReader> getFileTable() {
