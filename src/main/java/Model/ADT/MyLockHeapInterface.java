@@ -15,6 +15,11 @@ public interface MyLockHeapInterface<TKey extends Integer, TValue> {
     public boolean isDefined(int id);
 
     public String toString();
+
+    public void setFreeAddress(int newFreeAddress);
+
+    public int getFreeAddress();
+
     /**Add a new value to the heap and
      *  return the address where it was added
      */

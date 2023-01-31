@@ -14,13 +14,16 @@ public class ProgramState {
     private MyHeapInterface<Integer, Value> heap;
     private MyListInterface<Value> output;
     private MyLockHeapInterface<Integer, Value> lockHeap;
+
+    private MyLockHeapInterface<Integer, Integer> LatchTable;
     private IStmt originalProgram;
     private static int lastId = -1;
     private int id;
 
     public ProgramState(MyStackInterface<IStmt> exeStack, MyDictionaryInterface<String, Value> symTable,
                         MyDictionaryInterface<StringValue, BufferedReader> fileTable, MyListInterface<Value> output,
-                        MyHeapInterface<Integer, Value> heap ,IStmt originalProgram, MyLockHeapInterface<Integer, Value> lockHeap) {
+                        MyHeapInterface<Integer, Value> heap ,IStmt originalProgram, MyLockHeapInterface<Integer, Value> lockHeap,
+                        MyLockHeapInterface<Integer, Integer> LatchTable) {
         this.exeStack = exeStack;
         this.symTable = symTable;
         this.fileTable = fileTable;
@@ -28,6 +31,7 @@ public class ProgramState {
         this.lockHeap = lockHeap;
         this.output = output;
         this.originalProgram = originalProgram.deepCopy();
+        this.LatchTable = LatchTable;
         exeStack.push(originalProgram);
         if(lastId == -1){
             lastId = 0;
@@ -36,6 +40,14 @@ public class ProgramState {
             lastId++;
         }
         this.id = lastId;
+    }
+
+    public MyLockHeapInterface<Integer, Integer> getLatchTable() {
+        return LatchTable;
+    }
+
+    public void setLatchTable(MyLockHeapInterface<Integer, Integer> latchTable) {
+        LatchTable = latchTable;
     }
 
     public MyHeapInterface<Integer, Value> getHeap() {

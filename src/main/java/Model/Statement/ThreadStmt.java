@@ -33,7 +33,9 @@ public class ThreadStmt implements IStmt{
             state.getOutput(),
             state.getHeap(),
             stmt.deepCopy(),
-            state.getLockHeap());
+            state.getLockHeap(),
+                state.getLatchTable());
+
 
 
         return newState;

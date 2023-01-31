@@ -1,6 +1,7 @@
 package Model.Statement;
 
 import Model.Expression.Expression;
+import Model.Expression.LogicExpression;
 import Model.Type.BoolType;
 import Model.Type.Type;
 import Model.ProgramState;
@@ -48,8 +49,7 @@ public class IfStmt implements IStmt{
     @Override
     public MyDictionaryInterface<String, Type> typeCheck(MyDictionaryInterface<String, Type> typeEnv)
     throws MyException {
-        Type typeExpression = expression.typeCheck(typeEnv);
-        if(typeExpression instanceof BoolType){
+        if(expression instanceof LogicExpression){
             thenS.typeCheck(typeEnv.deepCopy());
             elseS.typeCheck(typeEnv.deepCopy());
             return typeEnv;

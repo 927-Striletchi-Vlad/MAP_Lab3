@@ -48,6 +48,14 @@ public class MyLockHeap<TKey extends Integer, TValue> implements MyLockHeapInter
         return result;
     }
 
+    public synchronized void setFreeAddress(int newFreeAddress) {
+        freeAddress = newFreeAddress;
+    }
+
+    public synchronized int getFreeAddress() {
+        return freeAddress;
+    }
+
     @Override
     public synchronized int allocate(TValue v) {
         heap.put((TKey)(Integer)freeAddress, v);
